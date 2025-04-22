@@ -1,5 +1,12 @@
 <template>
-  <div class="home">registry-form</div>
+  <div class="home">
+    <registry-form />
+  </div>
 </template>
 
-<script></script>
+<script>
+import RegistryForm from "../components/RegistryForm .vue";
+export default {
+  components: { RegistryForm },
+};
+</script>
