@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <div class="row justify-center">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-8">
         <q-card class="q-pa-md">
           <q-card-section>
             <div class="text-h5 text-center">Registration Form</div>
@@ -9,109 +9,134 @@
 
           <q-card-section>
             <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-              <q-input
-                filled
-                v-model="formData.firstName"
-                label="First Name *"
-                lazy-rules
-                :rules="[(val) => !!val || 'Field is required']" />
+              <q-expansion-item
+                group="somegroup"
+                icon="person"
+                label="Personal Information"
+                header-class="text-primary"
+                default-opened>
+                <div class="q-gutter-sm q-pa-md">
+                  <q-input
+                    filled
+                    v-model="formData.firstName"
+                    label="First Name *"
+                    lazy-rules
+                    :rules="[(val) => !!val || 'Field is required']" />
 
-              <q-input
-                filled
-                v-model="formData.lastName"
-                label="Last Name *"
-                lazy-rules
-                :rules="[(val) => !!val || 'Field is required']" />
+                  <q-input
+                    filled
+                    v-model="formData.lastName"
+                    label="Last Name *"
+                    lazy-rules
+                    :rules="[(val) => !!val || 'Field is required']" />
 
-              <q-input
-                filled
-                v-model="formData.email"
-                label="Email *"
-                type="email"
-                lazy-rules
-                :rules="[
-                  (val) => !!val || 'Field is required',
-                  (val) => /.+@.+\..+/.test(val) || 'Email must be valid',
-                ]" />
+                  <q-input
+                    filled
+                    v-model="formData.email"
+                    label="Email *"
+                    type="email"
+                    lazy-rules
+                    :rules="[
+                      (val) => !!val || 'Field is required',
+                      (val) => /.+@.+\..+/.test(val) || 'Email must be valid',
+                    ]" />
 
-              <q-input
-                filled
-                v-model="formData.phone"
-                label="Phone Number"
-                mask="(###) ### - ####"
-                unmasked-value />
+                  <q-input
+                    filled
+                    v-model="formData.phone"
+                    label="Phone Number"
+                    mask="(###) ### - ####"
+                    unmasked-value />
 
-              <q-select
-                filled
-                v-model="formData.gender"
-                :options="genderOptions"
-                label="Gender" />
+                  <q-select
+                    filled
+                    v-model="formData.gender"
+                    :options="genderOptions"
+                    label="Gender" />
 
-              <q-input
-                filled
-                type="date"
-                v-model="formData.birthDate"
-                label="Birth Date" />
+                  <q-input
+                    filled
+                    type="date"
+                    v-model="formData.birthDate"
+                    label="Birth Date" />
+                </div>
+              </q-expansion-item>
 
-              <q-separator class="q-my-md" />
+              <q-expansion-item
+                group="somegroup"
+                icon="home"
+                label="Address Information"
+                header-class="text-primary">
+                <div class="q-gutter-sm q-pa-md">
+                  <q-input
+                    filled
+                    v-model="formData.address.street"
+                    label="Street Address" />
 
-              <q-input
-                filled
-                v-model="formData.address.street"
-                label="Street Address" />
+                  <q-input
+                    filled
+                    v-model="formData.address.city"
+                    label="City" />
 
-              <q-input filled v-model="formData.address.city" label="City" />
+                  <q-input
+                    filled
+                    v-model="formData.address.state"
+                    label="State/Province" />
 
-              <q-input
-                filled
-                v-model="formData.address.state"
-                label="State/Province" />
+                  <q-input
+                    filled
+                    v-model="formData.address.zipCode"
+                    label="Zip/Postal Code" />
 
-              <q-input
-                filled
-                v-model="formData.address.zipCode"
-                label="Zip/Postal Code" />
+                  <q-select
+                    filled
+                    v-model="formData.address.country"
+                    :options="countryOptions"
+                    label="Country" />
+                </div>
+              </q-expansion-item>
 
-              <q-select
-                filled
-                v-model="formData.address.country"
-                :options="countryOptions"
-                label="Country" />
+              <q-expansion-item
+                group="somegroup"
+                icon="lock"
+                label="Account Information"
+                header-class="text-primary">
+                <div class="q-gutter-sm q-pa-md">
+                  <q-input
+                    filled
+                    v-model="formData.username"
+                    label="Username *"
+                    lazy-rules
+                    :rules="[(val) => !!val || 'Field is required']" />
 
-              <q-separator class="q-my-md" />
+                  <q-input
+                    filled
+                    type="password"
+                    v-model="formData.password"
+                    label="Password *"
+                    lazy-rules
+                    :rules="[
+                      (val) => !!val || 'Field is required',
+                      (val) =>
+                        val.length >= 8 ||
+                        'Password must be at least 8 characters',
+                    ]" />
 
-              <q-input
-                filled
-                v-model="formData.username"
-                label="Username *"
-                lazy-rules
-                :rules="[(val) => !!val || 'Field is required']" />
+                  <q-input
+                    filled
+                    type="password"
+                    v-model="formData.confirmPassword"
+                    label="Confirm Password *"
+                    lazy-rules
+                    :rules="[
+                      (val) => !!val || 'Field is required',
+                      (val) =>
+                        val === formData.password || 'Passwords do not match',
+                    ]" />
+                </div>
+              </q-expansion-item>
 
-              <q-input
-                filled
-                type="password"
-                v-model="formData.password"
-                label="Password *"
-                lazy-rules
-                :rules="[
-                  (val) => !!val || 'Field is required',
-                  (val) =>
-                    val.length >= 8 || 'Password must be at least 8 characters',
-                ]" />
-
-              <q-input
-                filled
-                type="password"
-                v-model="formData.confirmPassword"
-                label="Confirm Password *"
-                lazy-rules
-                :rules="[
-                  (val) => !!val || 'Field is required',
-                  (val) =>
-                    val === formData.password || 'Passwords do not match',
-                ]" />
-
-              <q-separator class="q-my-md" />
+              <q-separator class="q-my-sm" />
 
               <q-checkbox
                 v-model="formData.acceptTerms"
@@ -185,9 +210,7 @@ export default {
   methods: {
     onSubmit() {
       console.log("Form submitted:", this.formData);
-
       this.successDialog = true;
-
       this.onReset();
     },
     onReset() {
@@ -219,5 +242,11 @@ export default {
 .q-card {
   max-width: 800px;
   width: 100%;
+}
+
+.q-expansion-item__content {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin-bottom: 8px;
 }
 </style>
