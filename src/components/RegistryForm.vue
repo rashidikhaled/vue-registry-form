@@ -5,14 +5,14 @@
     </q-card-section>
 
     <q-card-section>
-      <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+      <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-sm">
         <q-expansion-item
-          v-model="expanded.personal"
+          group="somegroup"
           icon="person"
           label="Personal Information"
           header-class="text-primary"
           default-opened>
-          <div class="q-gutter-md q-pa-md">
+          <div class="q-gutter-sx q-pa-md">
             <q-input
               filled
               v-model="formData.firstName"
@@ -37,7 +37,8 @@
                 (val) => !!val || 'Field is required',
                 (val) => /.+@.+\..+/.test(val) || 'Email must be valid',
               ]" />
-
+          </div>
+          <div class="q-gutter-sm q-pa-md">
             <q-input
               filled
               v-model="formData.phone"
@@ -60,7 +61,7 @@
         </q-expansion-item>
 
         <q-expansion-item
-          v-model="expanded.address"
+          group="somegroup"
           icon="home"
           label="Address Information"
           header-class="text-primary">
@@ -91,7 +92,7 @@
         </q-expansion-item>
 
         <q-expansion-item
-          v-model="expanded.account"
+          group="somegroup"
           icon="lock"
           label="Account Information"
           header-class="text-primary">
