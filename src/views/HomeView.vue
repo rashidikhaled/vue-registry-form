@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <registry-form />
+    <user-registration-system />
   </div>
 </template>
 
 <script>
-import RegistryForm from "../components/RegistryForm .vue";
+import UserRegistrationSystem from "../pages/UserRegistrationSystem.vue";
 export default {
-  components: { RegistryForm },
+  components: { UserRegistrationSystem },
 };
 </script>
